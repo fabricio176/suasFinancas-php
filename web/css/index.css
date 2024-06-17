@@ -1,0 +1,75 @@
+*{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.bold{
+    font-weight: bold;
+    text-align: center;
+}
+
+.border{
+    border:1px solid rgba(128, 128, 128, 0.774);
+}
+
+body{
+    background-color: rgba(202, 196, 196, 0.418);
+}
+
+#clientImg1{
+    background-image: url(../assets/cartaoUm.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:cover ;
+    border-radius: 15px;
+}
+#clientImg2{
+    background-image: url(../assets/cartaoDois.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:cover ;
+    border-radius: 15px;
+}
+#clientImg3{
+    background-image: url(../assets/cartaoTres.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:cover ;
+    border-radius: 15px;
+}
+#tableform{
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: ;
+}
+
+#tableform th{
+    background-color: #ba2d2d;
+    color: white;
+    text-align: center;
+    padding: 13px;
+    border-style: none;
+}
+
+
+
+#tableform th:empty{
+ background-color: white;
+}
+
+
+#tableform{
+    border-collapse: collapse;
+}
+#tableform td{
+    border: 1px solid black;
+    padding: 13px;
+    text-align: center;
+}
+
+footer{
+    width: 100%;
+    margin-top: 10px;
+    padding: 20px 0px;
+    text-align: center;
+    color: white;
+}

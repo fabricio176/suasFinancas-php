@@ -1,0 +1,57 @@
+CREATE DATABASE suasfinancas;
+USE suasfinancas;
+
+-- Tabela para armazenar informações dos usuários
+CREATE TABLE Usuarios (
+    UserID INT PRIMARY KEY AUTO_INCREMENT,
+    Nome VARCHAR(100) NOT NULL,
+    Email VARCHAR(100) UNIQUE NOT NULL,
+    Senha VARCHAR(255) NOT NULL,
+    NivelAcesso ENUM('admin', 'usuario') NOT NULL DEFAULT 'usuario' -- Definindo 'usuario' como valor padrão
+);
+
+-- Tabela para armazenar informações de despesas
+CREATE TABLE Despesas (
+    DespesaID INT PRIMARY KEY AUTO_INCREMENT,
+    UserID INT NOT NULL,
+    Descricao VARCHAR(255) NOT NULL,
+    Valor DECIMAL(10,2) NOT NULL,
+    Categoria VARCHAR(50) NOT NULL,
+    DataDespesa DATE NOT NULL,
+    StatusDespesa ENUM('Paga', 'Não Paga') NOT NULL DEFAULT 'Não Paga',
+    FOREIGN KEY (UserID) REFERENCES Usuarios(UserID)
+);
+
+-- Tabela para armazenar informações de relatórios
+CREATE TABLE Relatorios (
+    RelatorioID INT PRIMARY KEY AUTO_INCREMENT,
+    UserID INT NOT NULL,
+    DataGeracao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    Tipo ENUM('PDF', 'Planilha') NOT NULL,
+    Arquivo BLOB NOT NULL,
+    FOREIGN KEY (UserID) REFERENCES Usuarios(UserID)
+);
+
+-- Tabela para armazenar informações de metas financeiras
+CREATE TABLE Metas (
+    MetaID INT PRIMARY KEY AUTO_INCREMENT,
+    UserID INT NOT NULL,
+    Descricao TEXT NOT NULL,
+    ValorAlvo DECIMAL(15,2) NOT NULL,
+    Prazo DATE NOT NULL,
+    Tipo ENUM('economia', 'investimento', 'outro') NOT NULL,
+    DataInicio DATE NOT NULL DEFAULT CURRENT_DATE,
+    FOREIGN KEY (UserID) REFERENCES Usuarios(UserID)
+);
+
+-- Tabela para armazenar informações de pagamentos
+CREATE TABLE Pagamentos (
+    PagamentoID INT PRIMARY KEY AUTO_INCREMENT,
+    DespesaID INT NOT NULL,
+    UserID INT NOT NULL,
+    Valor DECIMAL(10,2) NOT NULL,
+    DataPagamento DATE NOT NULL,
+    MetodoPagamento VARCHAR(50) NOT NULL,
+    FOREIGN KEY (DespesaID) REFERENCES Despesas(DespesaID),
+    FOREIGN KEY (UserID) REFERENCES Usuarios(UserID)
+);
