@@ -77,8 +77,7 @@ class Usuario
     }
 
     //Método para buscar usuário por email
-     // Método para buscar um usuário pelo email
-     // Método para buscar um usuário pelo email
+    // Método para buscar um usuário pelo email
     public function buscarUsuarioPorEmail($email)
     {
         // Consulta SQL para buscar o usuário pelo email
@@ -96,5 +95,16 @@ class Usuario
         }
     }
 
+    public function buscarDados($userID, $tabela)
+    {
+        // Consulta SQL para buscar os dados de uma tabela específica
+        $sql = "SELECT * FROM $tabela WHERE UserID = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $userID);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+
+    }
 }
-?>

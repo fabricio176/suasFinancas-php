@@ -22,22 +22,40 @@
                         <?php // Verifica se $_SESSION['despesas'] está definida
                         if (isset($_SESSION['despesas'])) {
 
-                            // Exemplo de como você pode iterar sobre $despesas para exibir na sua tabela HTML
+                            // $despesas: exibir tabela HTML
                             foreach ($despesas as $despesa) {
+                                //Tabela para exibir as Despesas com Formulário de Editar
                                 echo "<tr>";
-                                echo "<td>" . $despesa['Descricao'] . "</td>";
-                                echo "<td>R$ " . number_format($despesa['Valor'], 2, ',', '.') . "</td>";
-                                echo "<td>" . $despesa['Categoria'] . "</td>";
-                                echo "<td>" . date('d/m/Y', strtotime($despesa['DataDespesa'])) . "</td>";
-                                echo "<td>" . $despesa['StatusDespesa'] . "</td>";
+                                echo "<form method='post' action='processos/alterarDespesa.php'>";
+                                echo "<input type='hidden' name='DespesaID' value='" . $despesa['DespesaID'] . "'>";
+                                echo "<td><input type='text' class='form-control' name='descricao' value='" . $despesa['Descricao'] . "' required></td>";
+                                echo "<td><input type='number' step='0.01' class='form-control' name='valor' value='" . $despesa['Valor'] . "' required></td>";
+                                echo "<td><select class='form-select' name='categoria' required>";
+                                echo "<option value=''>Selecione uma categoria</option>";
+                                echo "<option value='Alimentação'" . ($despesa['Categoria'] == 'Alimentação' ? ' selected' : '') . ">Alimentação</option>";
+                                echo "<option value='Transporte'" . ($despesa['Categoria'] == 'Transporte' ? ' selected' : '') . ">Transporte</option>";
+                                echo "<option value='Moradia'" . ($despesa['Categoria'] == 'Moradia' ? ' selected' : '') . ">Moradia</option>";
+                                echo "<option value='Educação'" . ($despesa['Categoria'] == 'Educação' ? ' selected' : '') . ">Educação</option>";
+                                echo "<option value='Outros'" . ($despesa['Categoria'] == 'Outros' ? ' selected' : '') . ">Outros</option>";
+                                echo "</select></td>";
+                                echo "<td><input type='date' class='form-control' name='dataDespesa' value='" . $despesa['DataDespesa'] . "' required></td>";
+                                echo "<td><select class='form-select' name='status' required>";
+                                echo "<option value=''>Selecione um status</option>";
+                                echo "<option value='Paga'" . ($despesa['StatusDespesa'] == 'Paga' ? ' selected' : '') . ">Paga</option>";
+                                echo "<option value='Não Paga'" . ($despesa['StatusDespesa'] == 'Não Paga' ? ' selected' : '') . ">Não Paga</option>";
+                                echo "</select></td>";
                                 echo "<td>";
-                                echo "<button type='button' class='btn btn-warning btn-sm' onclick='alterarDespesa(" . $despesa['DespesaID'] . ")'>Alterar</button>";
-                                echo "<button type='button' class='btn btn-danger btn-sm' onclick='excluirDespesa(" . $despesa['DespesaID'] . ")'>Excluir</button>";
+                                echo "<button type='submit' class='btn btn-warning btn-sm'>Alterar</button>";
+                                echo "</form>";
+                                echo "<form method='post' action='processos/excluirDespesa.php' style='display:inline;'>";
+                                echo "<input type='hidden' name='DespesaID' value='" . $despesa['DespesaID'] . "'>";
+                                echo "<button type='submit' class='btn btn-danger btn-sm'>Excluir</button>";
+                                echo "</form>";
                                 echo "</td>";
                                 echo "</tr>";
                             }
                         } else {
-                            // Caso $_SESSION['despesas'] não esteja definida, você pode tratar isso conforme necessário
+                            // Caso $_SESSION['despesas'] não esteja definida,tratar isso conforme necessário
                             echo "Não há despesas para exibir.";
                         }
                         ?>

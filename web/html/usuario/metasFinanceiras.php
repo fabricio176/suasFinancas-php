@@ -41,7 +41,7 @@ if (!isset($_SESSION['Nome'])) {
                         </li>
                         <li class="navbar-item"><a href="pagamentos.php" class="nav-link text-white">Pagamentos</a>
                         </li>
-                        <li class="navbar-item"><a href="suaConta.php" class="nav-link text-white">Relatórios</a>
+                        <li class="navbar-item"><a href="relatorios.php" class="nav-link text-white">Relatórios</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav">
@@ -62,7 +62,7 @@ if (!isset($_SESSION['Nome'])) {
                 <hr>
                 <div class="row mt-5">
                     <div class="col-md-6 mx-auto">
-                        <form method="post" action="processos/usuario/cadastroMetas.php">
+                        <form method="post" action="processos/cadastroMetas.php">
                             <div class="mb-3">
                                 <label for="descricao" class="form-label">Descrição</label>
                                 <textarea class="form-control" id="descricao" name="descricao" rows="3"

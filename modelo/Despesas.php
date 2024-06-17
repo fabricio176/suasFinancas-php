@@ -71,5 +71,56 @@ class Despesas
         }
     }
 
+    public function excluirDespesa($userID, $despesaID)
+    {
+        global $conn;
+
+        // Preparar a declaração
+        $stmt = $conn->prepare("DELETE FROM Despesas WHERE UserID=? AND DespesaID=?");
+
+        // Verificar se a preparação da declaração foi bem sucedida
+        if (!$stmt) {
+            die('Erro na preparação da declaração SQL: ' . $conn->error);
+        }
+
+        // Vincular parâmetro
+        $stmt->bind_param("ii", $userID, $despesaID);
+
+        // Executar a declaração
+        $stmt->execute();
+
+        // Executar a declaração 
+        if ($stmt->execute()) {
+            return true;  // Exclusão bem-sucedida
+        } else {
+            return false; // Erro na Exclusão
+        }
+    }
+
+    public function atualizarDespesa($userID, $despesaID, $descricao, $valor, $categoria, $dataDespesa, $status)
+    {
+        global $conn;
+
+        // Preparar a declaração
+        $stmt = $conn->prepare("UPDATE Despesas SET Descricao = ?, Valor = ?, Categoria = ?, DataDespesa = ?, StatusDespesa = ?   WHERE UserID=? AND DespesaID=?");
+
+        // Verificar se a preparação da declaração foi bem sucedida
+        if (!$stmt) {
+            die('Erro na preparação da declaração SQL: ' . $conn->error);
+        }
+
+        //Vincular parâmetro
+        $stmt->bind_param("sssssii", $descricao, $valor, $categoria, $dataDespesa, $status, $userID, $despesaID, );
+
+        // Executar a declaração
+        $stmt->execute();
+
+        // Executar a declaração 
+        if ($stmt->execute()) {
+            return true;  // Atualização bem-sucedida
+        } else {
+            return false; // Erro na Atualização
+        }
+
+    }
 }
-?>

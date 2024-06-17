@@ -30,10 +30,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['Email'] = $usuario['Email'];
         $_SESSION['NivelAcesso'] = $usuario['NivelAcesso'];
 
+        // despesas
         $despesas = $despesaModel->verDespesas($_SESSION['UserID']);
 
-        // Armazenar as despesas na sessão
+        //busca os dados das tabelas para o dashboard
+        $despesasDashboard = $usuarioModel->buscarDados($_SESSION['UserID'], 'Despesas');
+        $metasDashboard = $usuarioModel->buscarDados($_SESSION['UserID'], 'Metas');
+        $pagamentosDashboard = $usuarioModel->buscarDados($_SESSION['UserID'], 'Pagamentos');
+
+        // Armazenar as vaariáveis na sessão
         $_SESSION['despesas'] = $despesas;
+        $_SESSION['despesasDashboard'] = $despesasDashboard;
+        $_SESSION['metasDashboard'] = $metasDashboard;
+        $_SESSION['pagamentosDashboard'] = $pagamentosDashboard;
 
 
 

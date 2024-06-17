@@ -9,27 +9,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Inclui o arquivo de conexão
     require_once '../../../../modelo/conexao.php';
     require_once '../../../../modelo/Usuario.php';
+    require_once '../../../../modelo/Pagamentos.php';
     require_once '../../../../modelo/Despesas.php';
 
 
     // Captura os dados do formulário
-    $descricao = $_POST['descricao'];
     $valor = $_POST['valor'];
-    $categoria = $_POST['categoria'];
-    $dataDespesa = $_POST['dataDespesa'];
-    $status = $_POST['status'];
+    $dataPagamento = $_POST['dataPagamento'];
+    $metodoPagamento = $_POST['metodoPagamento'];
+    $despesaID = $_POST['despesaID'];
     $userID = $_SESSION['UserID']; //UserID na sessão
 
 
 
     // Instancia a classe Despesa com a conexão
-    $despesaModel = new Despesas($conn);
+    $pagamentosaModel = new Pagamentos($conn);
     $usuarioModel = new Usuario($conn);
+    $despesaModel = new Despesas($conn);
 
 
 
-    // Chama o método para inserir um novo usuário
-    $inserido = $despesaModel->inserirDespesa($userID, $descricao, $valor, $categoria, $dataDespesa, $status);
+    // Chama o método para inserir um novo pagamento
+    $inserido = $pagamentosaModel->inserirPagamento($despesaID, $userID, $valor, $dataPagamento, $metodoPagamento);
 
 
 
@@ -51,16 +52,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['pagamentosDashboard'] = $pagamentosDashboard;
 
         echo "<script>
-                alert('Despesa inserida com sucesso.');
-                window.location.href = '../../usuario/despesas.php';
+                alert('Pagamento feito com sucesso.');
+                window.location.href = '../../usuario/dashboard.php';
               </script>";
         exit;
     } else {
-        $erro = "Erro ao cadastrar despesa. Por favor, tente novamente mais tarde.";
+        $erro = "Erro ao registrar pagamento. Por favor, tente novamente mais tarde.";
         echo "<script>alert('$erro');
-            window.location.href = '../../usuario/despesas.php';
+            window.location.href = '../../usuario/pagamentos.php';
               </script>";
         exit;
     }
 }
-?>

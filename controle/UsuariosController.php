@@ -26,7 +26,10 @@ class UsuariosController
         return $this->usuarioModel->atualizarUsuario($userID, $nome, $email, $senha);
     }
 
+    public function buscarDados($userID, $tabela)
+    {
+        return $this->usuarioModel->buscarDados($userID, $tabela);
+    }
 }
 // Fechar a conexão após todas as operações
 $conn->close();
-?>

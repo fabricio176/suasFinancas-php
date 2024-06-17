@@ -44,7 +44,7 @@ $despesas = isset($_SESSION['despesas']) ? $_SESSION['despesas'] : [];
                         </li>
                         <li class="navbar-item"><a href="pagamentos.php" class="nav-link text-white">Pagamentos</a>
                         </li>
-                        <li class="navbar-item"><a href="suaConta.php" class="nav-link text-white">Relatórios</a>
+                        <li class="navbar-item"><a href="relatorios.php" class="nav-link text-white">Relatórios</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav">

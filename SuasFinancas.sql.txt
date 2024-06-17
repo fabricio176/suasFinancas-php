@@ -27,8 +27,6 @@ CREATE TABLE Relatorios (
     RelatorioID INT PRIMARY KEY AUTO_INCREMENT,
     UserID INT NOT NULL,
     DataGeracao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    Tipo ENUM('PDF', 'Planilha') NOT NULL,
-    Arquivo BLOB NOT NULL,
     FOREIGN KEY (UserID) REFERENCES Usuarios(UserID)
 );
 
@@ -55,3 +53,17 @@ CREATE TABLE Pagamentos (
     FOREIGN KEY (DespesaID) REFERENCES Despesas(DespesaID),
     FOREIGN KEY (UserID) REFERENCES Usuarios(UserID)
 );
+
+-- Criando a trigger
+DELIMITER //
+
+CREATE TRIGGER trg_atualizar_status_despesa AFTER INSERT ON Pagamentos
+FOR EACH ROW
+BEGIN
+    -- Atualiza o status da despesa para 'Paga' quando um pagamento é registrado
+    UPDATE Despesas
+    SET StatusDespesa = 'Paga'
+    WHERE DespesaID = NEW.DespesaID;  -- NEW.DespesaID se refere ao DespesaID inserido na tabela Pagamentos
+END//
+
+DELIMITER ;

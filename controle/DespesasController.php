@@ -19,13 +19,24 @@ class DespesasController
         return $this->despesaModel->inserirDespesa($userID, $descricao, $valor, $categoria, $dataDespesa, $status);
     }
 
+    // Método para ver despesas
     public function verDespesas($userID)
     {
         return $this->despesaModel->verDespesas($userID);
     }
 
+    // Método para excluir despesa
+    public function excluirDespesa($userID, $despesaID)
+    {
+        return $this->despesaModel->excluirDespesa($userID, $despesaID);
+    }
+
+    // Método para atualizar despesa
+    public function autalizarDespesa($userID, $despesaID, $descricao, $valor, $categoria, $dataDespesa, $status)
+    {
+        return $this->despesaModel->atualizarDespesa($userID, $despesaID, $descricao, $valor, $categoria, $dataDespesa, $status);
+    }
 }
 
 // Fechar a conexão após todas as operações
 $conn->close();
-?>
