@@ -113,7 +113,7 @@ class Despesas
         }
 
         //Vincular parâmetro
-        $stmt->bind_param("sssssii", $descricao, $valor, $categoria, $dataDespesa, $status, $userID, $despesaID, );
+        $stmt->bind_param("sssssii", $descricao, $valor, $categoria, $dataDespesa, $status, $userID, $despesaID,);
 
         // Executar a declaração
         $stmt->execute();
@@ -124,7 +124,6 @@ class Despesas
         } else {
             return false; // Erro na Atualização
         }
-
     }
 
     public function limiteDeGastos($userID, $categoria, $limite)
@@ -242,7 +241,6 @@ class Despesas
                 // Se encontrou uma correspondência, retorna a categoria
                 return $regra['Categoria'];
             }
-
         }
         // Se nenhuma regra corresponder, retorna uma categoria padrão ou null
         return null;
@@ -251,20 +249,19 @@ class Despesas
     public function inserirOuAtualizarValorMinimo($userID, $valorMinimo)
     {
         // Verifica se o valor mínimo já existe para o usuário
-        $sql = "SELECT ValorMinimo FROM Despesas WHERE UserID = ?";
+        $sql = "SELECT ValorMinimo FROM ValorMinimo WHERE UserID = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param('i', $userID);
         $stmt->execute();
         $result = $stmt->get_result();
-
         if ($result->num_rows > 0) {
             // Se o valor mínimo já existe, atualizar o valor
-            $sql = "UPDATE Despesas SET ValorMinimo = ? WHERE UserID = ?";
+            $sql = "UPDATE ValorMinimo SET ValorMinimo = ? WHERE UserID = ?";
             $stmt = $this->conn->prepare($sql);
             $stmt->bind_param('di', $valorMinimo, $userID);
         } else {
             // Se o valor mínimo não existe, inserir um novo valor
-            $sql = "INSERT INTO Despesas (UserID, ValorMinimo) VALUES (?, ?)";
+            $sql = "INSERT INTO ValorMinimo (UserID, ValorMinimo) VALUES (?, ?)";
             $stmt = $this->conn->prepare($sql);
             $stmt->bind_param('id', $userID, $valorMinimo);
         }
@@ -276,9 +273,10 @@ class Despesas
         }
     }
 
+
     public function obterValorMinimo($userID)
     {
-        $sql = "SELECT ValorMinimo FROM Despesas WHERE UserID = ?";
+        $sql = "SELECT ValorMinimo FROM ValorMinimo WHERE UserID = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param('i', $userID);
         $stmt->execute();

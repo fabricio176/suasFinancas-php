@@ -37,6 +37,14 @@ class DespesasController
         return $this->despesaModel->atualizarDespesa($userID, $despesaID, $descricao, $valor, $categoria, $dataDespesa, $status);
     }
 
+    public function inserirOuAtualizarValorMinimo($userID, $valorMinimo){
+        return $this->inserirOuAtualizarValorMinimo($userID, $valorMinimo);
+    }
+
+    public function obterValorMinimo($userID){
+        return $this->obterValorMinimo($userID);
+    }
+
 }
 
 // Fechar a conexão após todas as operações
