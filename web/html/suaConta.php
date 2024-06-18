@@ -22,7 +22,7 @@
                     <ul class="navbar-nav">
                         <li class="navbar-item"><a href="#"><img src="assets/logoWhite.svg" alt="" height="100%"></
                                     </li>
-                        <li class="navbar-item"><a href="../index.php" class="nav-link text-white">Home</a></li>
+                        <li class="navbar-item"><a href="../../index.php" class="nav-link text-white">Home</a></li>
                         <li class="navbar-item"><a href="ajuda.php" class="nav-link text-white">Ajuda</a></li>
                         <li class="navbar-item"><a href="suasMetas.php" class="nav-link text-white">Suas Metas</a></li>
                         <li class="navbar-item"><a href="suaConta.php" class="nav-link text-warning">Sua Conta</a></li>
@@ -31,9 +31,16 @@
                         <li class="navbar-item"><button class="btn btn-outline text-white border-white"
                                 data-bs-toggle="modal" data-bs-target="#popUpLogin"> LOGIN
                             </button></li>
+                        <li class="navbar-item"><button class="btn btn-outline text-white border-white"
+                                data-bs-toggle="modal" data-bs-target="#popUpSignIn"> CADASTRE-SE
+                            </button></li>
                     </ul>
                 </div>
             </nav>
+            <!-- MODAL SIGIN -->
+            <?php include 'components/modalSignIn.php'; ?>
+            <!-- MODAL SIGIN -->
+
             <!-- MODAL LOGIN -->
             <?php include 'components/modalLogin.php'; ?>
             <!-- MODAL LOGIN -->
@@ -56,7 +63,8 @@
                             <li>Acompanhe suas transações em tempo real com notificações instantâneas.</li>
                         </ul>
                         <div class="text-center">
-                            <a href="#" class="btn btn-warning">Abra Sua Conta Agora</a>
+                            <a href="#" class="btn btn-warning" data-bs-toggle="modal"
+                                data-bs-target="#popUpSignIn">Abra Sua Conta Agora</a>
                         </div>
                     </div>
                     <div class="col-md-6">

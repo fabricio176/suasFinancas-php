@@ -21,7 +21,8 @@ $pagamentosDashboard = isset($_SESSION['despesasDashboard']) ? $_SESSION['pagame
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - SuasFinanças</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="../../../css/index.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -36,7 +37,8 @@ $pagamentosDashboard = isset($_SESSION['despesasDashboard']) ? $_SESSION['pagame
             <nav class="navbar navbar-expand-sm bg-dark py-4">
                 <div class="container">
                     <ul class="navbar-nav">
-                        <li class="navbar-item"><a href="index.php"><img src="assets/logoWhite.svg" alt="" height="100%"></a>
+                        <li class="navbar-item"><a href="index.php"><img src="assets/logoWhite.svg" alt=""
+                                    height="100%"></a>
                         </li>
                         <li class="navbar-item"><a href="dashboard.php" class="nav-link text-warning">Dashboard</a>
                         </li>
@@ -50,15 +52,22 @@ $pagamentosDashboard = isset($_SESSION['despesasDashboard']) ? $_SESSION['pagame
                         </li>
                     </ul>
                     <ul class="navbar-nav">
-                        <li class="navbar-item"><button class="btn btn-outline text-white border-white" data-bs-toggle="modal" data-bs-target="#popUpLogin"> MEU PERFIL
+                        <li class="navbar-item"><button class="btn btn-outline text-white border-white"
+                                data-bs-toggle="modal" data-bs-target="#popUpLogin"> MEU PERFIL
                             </button></li>
-                        <li class="navbar-item"><button class="btn btn-outline text-white border-white"> SAIR
-                            </button></li>
+                        <li class="nav-item" >
+                            <a class="btn btn-danger" href="../../../index.php">SAIR</a>
+                        </li>
+
                     </ul>
                 </div>
             </nav>
         </header>
         <!-- ---------- HEADER -------- -->
+
+        <!-- MODAL MEU PERFIL -->
+        <?php include '../components/modalMeuPerfil.php'; ?>
+        <!-- MODAL MEU PERFIL -->
 
         <!-- MAIN DASHBOARD CONTENT -->
         <main class="container my-5">
@@ -104,9 +113,15 @@ $pagamentosDashboard = isset($_SESSION['despesasDashboard']) ? $_SESSION['pagame
     <!-- ----------------------- MAIN PAGE ------------------- -->
 
     <!-- ----------------------- SCRIPT ------------------- -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
+        crossorigin="anonymous"></script>
     <script>
         // Converte os dados do PHP para o JavaScript
         const despesasData = <?php echo json_encode($despesasDashboard); ?>;

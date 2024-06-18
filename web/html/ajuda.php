@@ -22,7 +22,7 @@
                     <ul class="navbar-nav">
                         <li class="navbar-item"><a href="#"><img src="assets/logoWhite.svg" alt="" height="100%"></a>
                         </li>
-                        <li class="navbar-item"><a href="../index.php" class="nav-link text-white">Home</a></li>
+                        <li class="navbar-item"><a href="../../index.php" class="nav-link text-white">Home</a></li>
                         <li class="navbar-item"><a href="ajuda.php" class="nav-link text-warning">Ajuda</a></li>
                         <li class="navbar-item"><a href="suasMetas.php" class="nav-link text-white">Suas Metas</a></li>
                         <li class="navbar-item"><a href="suaConta.php" class="nav-link text-white">Sua Conta</a></li>

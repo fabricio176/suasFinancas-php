@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Exibe o alerta em JavaScript com função de callback
         echo "<script>
                 alert('$erro');
-                window.location.href = '../../index.php';
+                window.location.href = '../../../../index.php';
               </script>";
         exit; // Encerra o script para evitar problemas de redirecionamento
     } else {
@@ -31,15 +31,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($inserido) {
             // Redireciona ou executa outra ação após o cadastro
+            
+
             echo "<script>
                 alert('Usuário cadastrado com Sucesso, efetue o logn.');
-                window.location.href = '../../index.php';
+                window.location.href = '../../../../index.php';
               </script>";
             exit;
         } else {
             $erro = "Erro ao cadastrar usuário. Por favor, tente novamente mais tarde.";
             echo "<script>alert('$erro');</script>";
-            header('Location: ../../index.php');
+            header('Location: ../../../../index.php');
             exit;
         }
     }
@@ -48,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $erro = "Erro: Formulário não enviado corretamente.";
     echo "<script>
         alert('$erro');
-        window.location.href = '../../index.php';
+        window.location.href = '../../../../index.php';
         </script>";
 }
 ?>

@@ -51,13 +51,19 @@ $despesas = isset($_SESSION['despesas']) ? $_SESSION['despesas'] : [];
                         <li class="navbar-item"><button class="btn btn-outline text-white border-white"
                                 data-bs-toggle="modal" data-bs-target="#popUpLogin"> MEU PERFIL
                             </button></li>
-                        <li class="navbar-item"><button class="btn btn-outline text-white border-white"> SAIR
-                            </button></li>
+                        <li class="nav-item">
+                            <a class="btn btn-danger" href="../../../index.php">SAIR</a>
+                        </li>
                     </ul>
                 </div>
             </nav>
         </header>
         <!-- ---------- HEADER -------- -->
+
+        <!-- MODAL MEU PERFIL -->
+        <?php include '../components/modalMeuPerfil.php'; ?>
+        <!-- MODAL MEU PERFIL -->
+
         <!-- ---------- MAIN -------- -->
         <!-- DESPESAS CONTENT -->
         <main>
@@ -83,6 +89,8 @@ $despesas = isset($_SESSION['despesas']) ? $_SESSION['despesas'] : [];
                                     <option value="Transporte">Transporte</option>
                                     <option value="Moradia">Moradia</option>
                                     <option value="Educação">Educação</option>
+                                    <option value="Saúde">Saúde</option>
+                                    <option value="Lazer">Lazer</option>
                                     <option value="Outros">Outros</option>
                                 </select>
                             </div>
@@ -97,6 +105,23 @@ $despesas = isset($_SESSION['despesas']) ? $_SESSION['despesas'] : [];
                                     <option value="Paga">Paga</option>
                                     <option value="Não Paga">Não Paga</option>
                                 </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-check-label">Recorrente:</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="recorrente" id="recorrente_sim"
+                                        value="1">
+                                    <label class="form-check-label" for="recorrente_sim">
+                                        Sim
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="recorrente" id="recorrente_nao"
+                                        value="0" checked>
+                                    <label class="form-check-label" for="recorrente_nao">
+                                        Não
+                                    </label>
+                                </div>
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary">Registrar Despesa</button>

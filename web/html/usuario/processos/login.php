@@ -18,6 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Busca o usuário pelo email fornecido
     $usuario = $usuarioModel->buscarUsuarioPorEmail($email);
 
+    
     if ($usuario && password_verify($senha, $usuario['Senha'])) {
         // Iniciar a sessão (se ainda não estiver iniciada)
         if (session_status() == PHP_SESSION_NONE) {
@@ -27,8 +28,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Armazenar dados do usuário na sessão
         $_SESSION['UserID'] = $usuario['UserID'];
         $_SESSION['Nome'] = $usuario['Nome'];
-        $_SESSION['Email'] = $usuario['Email'];
+        $_SESSION['Email'] = $usuario['Email']; 
         $_SESSION['NivelAcesso'] = $usuario['NivelAcesso'];
+
+
 
         // despesas
         $despesas = $despesaModel->verDespesas($_SESSION['UserID']);
@@ -53,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $erro = "Credenciais inválidas. Por favor, tente novamente.";
         echo "<script>
         alert('$erro');
-        window.location.href = '../../index.php';
+        window.location.href = '../../../../index.php';
         </script>";
     }
 } else {
@@ -61,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $erro = "Erro: Formulário não enviado corretamente.";
     echo "<script>
         alert('$erro');
-        window.location.href = '../../index.php';
+        window.location.href = '../../../../index.php';
         </script>";
 }
 ?>

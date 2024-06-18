@@ -18,7 +18,7 @@ if (!isset($_SESSION['Nome'])) {
     <title>Seja Bem Vindo - SuasFinanças</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <link rel="stylesheet" href="../../../css/index.css">
+    <link rel="stylesheet" href="../../css/index.css">
 </head>
 
 <body>
@@ -34,32 +34,33 @@ if (!isset($_SESSION['Nome'])) {
                         <li class="navbar-item"><a href="index.php"><img src="assets/logoWhite.svg" alt=""
                                     height="100%"></a>
                         </li>
-                        <li class="navbar-item"><a href="dashboard.php"
-                                class="nav-link text-white">Dashboard</a>
+                        <li class="navbar-item"><a href="dashboard.php" class="nav-link text-white">Dashboard</a>
                         </li>
-                        <li class="navbar-item"><a href="despesas.php"
-                                class="nav-link text-white">Despesas</a></li>
-                        <li class="navbar-item"><a href="metasFinanceiras.php"
-                                class="nav-link text-white">Metas
+                        <li class="navbar-item"><a href="despesas.php" class="nav-link text-white">Despesas</a></li>
+                        <li class="navbar-item"><a href="metasFinanceiras.php" class="nav-link text-white">Metas
                                 Financeiras</a>
                         </li>
-                        <li class="navbar-item"><a href="pagamentos.php"
-                                class="nav-link text-white">Pagamentos</a>
+                        <li class="navbar-item"><a href="pagamentos.php" class="nav-link text-white">Pagamentos</a>
                         </li>
                         <li class="navbar-item"><a href="relatorios.php" class="nav-link text-white">Relatórios</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav">
                         <li class="navbar-item"><button class="btn btn-outline text-white border-white"
-                                data-bs-toggle="modal" data-bs-target="#popUpLogin"> MEU PERFIL
-                            </button></li>
-                        <li class="navbar-item"><button class="btn btn-outline text-white border-white"> SAIR
-                            </button></li>
+                                data-bs-toggle="modal" data-bs-target="#popUpLogin"> MEU PERFIL</button></li>
+                        <li class="nav-item">
+                            <a class="btn btn-danger" href="../../../index.php">SAIR</a>
+                        </li>
                     </ul>
                 </div>
             </nav>
         </header>
         <!-- ---------- HEADER -------- -->
+
+        <!-- MODAL MEU PERFIL -->
+        <?php include '../components/modalMeuPerfil.php'; ?>
+        <!-- MODAL MEU PERFIL -->
+
         <!-- ---------- MAIN -------- -->
         <main>
             <!-- BOAS VINDAS CONTENT -->
@@ -83,7 +84,8 @@ if (!isset($_SESSION['Nome'])) {
                         </div>
                     </div>
                     <div class="container-fluidcol-md-6 d-flex align-items-center justify-content-center">
-                        <img src="../../assets/account-image2.jpg" alt="Imagem de conta" class="img-fluid" style="height: 1005;">
+                        <img src="../../assets/account-image2.jpg" alt="Imagem de conta" class="img-fluid"
+                            style="height: 1005;">
                     </div>
                 </div>
 
@@ -109,6 +111,8 @@ if (!isset($_SESSION['Nome'])) {
                 </div>
             </div>
         </main>
+
+
         <!-- ---------- MAIN -------- -->
 
         <!-- ---------- FOOTER -------- -->

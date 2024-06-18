@@ -48,13 +48,19 @@ if (!isset($_SESSION['Nome'])) {
                         <li class="navbar-item"><button class="btn btn-outline text-white border-white"
                                 data-bs-toggle="modal" data-bs-target="#popUpLogin"> MEU PERFIL
                             </button></li>
-                        <li class="navbar-item"><button class="btn btn-outline text-white border-white"> SAIR
-                            </button></li>
+                        <li class="nav-item">
+                            <a class="btn btn-danger" href="../../../index.php">SAIR</a>
+                        </li>
                     </ul>
                 </div>
             </nav>
         </header>
         <!-- ---------- HEADER -------- -->
+
+        <!-- MODAL MEU PERFIL -->
+        <?php include '../components/modalMeuPerfil.php'; ?>
+        <!-- MODAL MEU PERFIL -->
+
         <!-- ---------- MAIN -------- -->
         <main>
             <div class="container my-5">

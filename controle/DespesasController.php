@@ -32,10 +32,11 @@ class DespesasController
     }
 
     // Método para atualizar despesa
-    public function autalizarDespesa($userID, $despesaID, $descricao, $valor, $categoria, $dataDespesa, $status)
+    public function atualizarDespesa($userID, $despesaID, $descricao, $valor, $categoria, $dataDespesa, $status)
     {
         return $this->despesaModel->atualizarDespesa($userID, $despesaID, $descricao, $valor, $categoria, $dataDespesa, $status);
     }
+
 }
 
 // Fechar a conexão após todas as operações

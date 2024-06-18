@@ -8,7 +8,7 @@
     <title>SuasFinanças</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="web/css/index.css">
 </head>
 
 <body>
@@ -24,28 +24,104 @@
                                     height="100%"></a>
                         </li>
                         <li class="navbar-item"><a href="index.php" class="nav-link text-warning">Home</a></li>
-                        <li class="navbar-item"><a href="ajuda.php" class="nav-link text-white">Ajuda</a></li>
-                        <li class="navbar-item"><a href="suasMetas.php" class="nav-link text-white">Suas Metas</a>
+                        <li class="navbar-item"><a href="web/html/ajuda.php" class="nav-link text-white">Ajuda</a></li>
+                        <li class="navbar-item"><a href="web/html/suasMetas.php" class="nav-link text-white">Suas Metas</a>
                         </li>
-                        <li class="navbar-item"><a href="suaConta.php" class="nav-link text-white">Sua Conta</a>
+                        <li class="navbar-item"><a href="web/html/suaConta.php" class="nav-link text-white">Sua Conta</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav">
                         <li class="navbar-item"><button class="btn btn-outline text-white border-white"
                                 data-bs-toggle="modal" data-bs-target="#popUpLogin"> LOGIN
                             </button></li>
-                            <li class="navbar-item"><button class="btn btn-outline text-white border-white"
+                        <li class="navbar-item"><button class="btn btn-outline text-white border-white"
                                 data-bs-toggle="modal" data-bs-target="#popUpSignIn"> CADASTRE-SE
                             </button></li>
                     </ul>
                 </div>
             </nav>
-             <!-- MODAL LOGIN -->
-             <?php include 'components/modalLogin.php'; ?>
+            <!-- MODAL LOGIN -->
+            <div class="modal" id="popUpLogin">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <!-- MODAL HEADER -->
+                        <div class="modal-header d-flex justify-content-center">
+                            <h3>LOGIN</h3>
+                        </div>
+                        <!-- MODAL HEADER -->
+
+                        <!-- MODAL BODY -->
+                        <div class="modal-body">
+                            <form action="web/html/usuario/processos/login.php" method="post">
+                                <div class="form-group my-3">
+                                    <label for="email">Email</label>
+                                    <input class="form-control" type="email" name="email" id="email"
+                                        placeholder="Digite seu email">
+                                </div>
+                                <div class="form-group my-3">
+                                    <label for="password">Senha</label>
+                                    <input autocomplete="off" class="form-control" type="password" name="senha"
+                                        id="senha" placeholder="Digite sua senha">
+                                </div>
+                                <button class="btn btn-warning" type="reset">Limpar</button>
+                                <button class="btn btn-success" type="submit">Enviar</button>
+                            </form>
+                        </div>
+                        <!-- MODAL BODY -->
+
+                        <!-- MODAL FOOTER -->
+                        <div class="modal-footer">
+                            <button class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                        </div>
+                        <!-- MODAL FOOTER -->
+                    </div>
+                </div>
+            </div>
             <!-- MODAL LOGIN -->
 
-             <!-- MODAL SIGIN -->
-             <?php include 'components/modalSignIn.php'; ?>
+            <!-- MODAL SIGIN -->
+            <div class="modal" id="popUpSignIn">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <!-- MODAL HEADER -->
+                        <div class="modal-header d-flex justify-content-center">
+                            <h3>Cadastre-se</h3>
+                        </div>
+                        <!-- MODAL HEADER -->
+
+                        <!-- MODAL BODY -->
+                        <div class="modal-body">
+                            <form action="web/html/usuario/processos/cadastro.php" method="post">
+                                <div class="form-group my-3">
+                                    <label for="name">Nome</label>
+                                    <input class="form-control" type="text" name="nome" id="nome"
+                                        placeholder="Digite seu nome">
+                                </div>
+
+                                <div class="form-group my-3">
+                                    <label for="email">Email</label>
+                                    <input class="form-control" type="email" name="email" id="email"
+                                        placeholder="Digite seu email">
+                                </div>
+                                <div class="form-group my-3">
+                                    <label for="password">Senha</label>
+                                    <input autocomplete="off" class="form-control" type="password" name="senha"
+                                        id="senha" placeholder="Digite sua senha">
+                                </div>
+                                <button class="btn btn-warning" type="reset">Limpar</button>
+                                <button class="btn btn-success" type="submit">Enviar</button>
+                            </form>
+                        </div>
+                        <!-- MODAL BODY -->
+
+                        <!-- MODAL FOOTER -->
+                        <div class="modal-footer">
+                            <button class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                        </div>
+                        <!-- MODAL FOOTER -->
+                    </div>
+                </div>
+            </div>
             <!-- MODAL SIGIN -->
         </header>
         <!-- ---------- HEADER -------- -->
@@ -63,13 +139,13 @@
                 <!-- SLIDER -->
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="../assets/banner7.jpg" alt="" class="d-block" style="width: 100%; height:700px">
+                        <img src="web/assets/banner7.jpg" alt="" class="d-block" style="width: 100%; height:700px">
                     </div>
                     <div class="carousel-item">
-                        <img img src="../assets/banner.jpg" alt="" class="d-block" style="width: 100%; height:700px">
+                        <img img src="web/assets/banner.jpg" alt="" class="d-block" style="width: 100%; height:700px">
                     </div>
                     <div class="carousel-item">
-                        <img src="../assets/banner4.jpg" alt="" class="d-block" style="width: 100% ; height:700px">
+                        <img src="web/assets/banner4.jpg" alt="" class="d-block" style="width: 100% ; height:700px">
                     </div>
                 </div>
                 <!-- ARROW INDICATOR -->
@@ -95,7 +171,7 @@
                 <div class="row d-flex justify-content-center my-5">
                     <div class="col-3 mx-3">
                         <div class="card p-5" style="height: 400px ;">
-                            <img src="../assets/codigoDeBarras.svg" alt="">
+                            <img src="web/assets/codigoDeBarras.svg" alt="">
                             <div class="card-body text-center ">
                                 <h3 class="card-title bold">BOLETO</h3>
                                 <p class="card-text">Processamento em até 48 Horas.</p>
@@ -104,7 +180,7 @@
                     </div>
                     <div class="col-3">
                         <div class="card p-5" style="height: 400px ;">
-                            <img src="../assets/CartaoDeCredito.svg" alt="Código de Barras">
+                            <img src="web/assets/CartaoDeCredito.svg" alt="Código de Barras">
                             <div class="card-body text-center">
                                 <h3 class="card-title bold">CARTÃO</h3>
                                 <p class="card-text">Divida em até 24 vezes.</p>
@@ -113,7 +189,7 @@
                     </div>
                     <div class="col-3 mx-3">
                         <div class="card p-5" style="height: 400px ;">
-                            <img src="../assets/Dinheiro.svg" alt="Icone de cartão de crédito">
+                            <img src="web/assets/Dinheiro.svg" alt="Icone de cartão de crédito">
                             <div class="card-body text-center">
                                 <h3 class="card-title bold">DINHEIRO</h3>
                                 <p class="card-text">15% de Desconto!</p>
@@ -135,7 +211,7 @@
                         financeiro eficaz.</p>
                 </div>
                 <div class="container" style="width: 50%;">
-                    <img class="m-3 p-0" src="../assets/bannerBeneficios.jpg" alt="" style="width:100%; height: 90%;">
+                    <img class="m-3 p-0" src="web/assets/bannerBeneficios.jpg" alt="" style="width:100%; height: 90%;">
                 </div>
             </div>
             <h1 class="bold" style="text-align: center;">SEJA CLIENTE DE DIVERSAS MANEIRAS!</h1>

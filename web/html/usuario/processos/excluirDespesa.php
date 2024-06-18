@@ -8,6 +8,7 @@ session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Inclui o arquivo de conexão
     require_once '../../../../modelo/conexao.php';
+    require_once '../../../../modelo/Usuario.php';
     require_once '../../../../modelo/Despesas.php';
 
 
@@ -34,6 +35,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Armazenar as despesas na sessão
         $_SESSION['despesas'] = $despesas;
+
+        //busca os dados das tabelas para o dashboard
+        $despesasDashboard = $usuarioModel->buscarDados($_SESSION['UserID'], 'Despesas');
+        $metasDashboard = $usuarioModel->buscarDados($_SESSION['UserID'], 'Metas');
+        $pagamentosDashboard = $usuarioModel->buscarDados($_SESSION['UserID'], 'Pagamentos');
+
+        // Armazenar as vaariáveis na sessão
+        $_SESSION['despesas'] = $despesas;
+        $_SESSION['despesasDashboard'] = $despesasDashboard;
+        $_SESSION['metasDashboard'] = $metasDashboard;
+        $_SESSION['pagamentosDashboard'] = $pagamentosDashboard;
 
 
         echo "<script>

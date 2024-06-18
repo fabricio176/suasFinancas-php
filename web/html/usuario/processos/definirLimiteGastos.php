@@ -8,62 +8,57 @@ session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Inclui o arquivo de conexão
     require_once '../../../../modelo/conexao.php';
+    require_once '../../../../modelo/Usuario.php';
+    require_once '../../../../modelo/Pagamentos.php';
     require_once '../../../../modelo/Despesas.php';
 
 
     // Captura os dados do formulário
-    $descricao = $_POST['descricao'];
-    $valor = $_POST['valor'];
     $categoria = $_POST['categoria'];
-    $dataDespesa = $_POST['dataDespesa'];
-    $status = $_POST['status'];
+    $limite = $_POST['limite'];
     $userID = $_SESSION['UserID']; //UserID na sessão
-    $despesaID = $_POST['DespesaID'];
 
 
 
     // Instancia a classe Despesa com a conexão
+    $pagamentosaModel = new Pagamentos($conn);
+    $usuarioModel = new Usuario($conn);
     $despesaModel = new Despesas($conn);
 
 
 
-    // Chama o método para inserir um novo usuário
-    $atualizado = $despesaModel->atualizarDespesa($userID, $despesaID, $descricao, $valor, $categoria, $dataDespesa, $status);
+    // Chama o método para inserir um novo limite de gastos
+    $inserido = $despesaModel->limiteDeGastos($userID, $categoria, $limite);
 
 
 
-    if ($atualizado) {
+    if ($inserido) {
         // Redireciona ou executa outra ação após o cadastro
 
         //Chama o método para ver as despesas
         $despesas = $despesaModel->verDespesas($userID);
-
-        // Armazenar as despesas na sessão
-        $_SESSION['despesas'] = $despesas;
 
         //busca os dados das tabelas para o dashboard
         $despesasDashboard = $usuarioModel->buscarDados($_SESSION['UserID'], 'Despesas');
         $metasDashboard = $usuarioModel->buscarDados($_SESSION['UserID'], 'Metas');
         $pagamentosDashboard = $usuarioModel->buscarDados($_SESSION['UserID'], 'Pagamentos');
 
-        // Armazenar as variáveis na sessão
+        // Armazenar as vaariáveis na sessão
         $_SESSION['despesas'] = $despesas;
         $_SESSION['despesasDashboard'] = $despesasDashboard;
         $_SESSION['metasDashboard'] = $metasDashboard;
         $_SESSION['pagamentosDashboard'] = $pagamentosDashboard;
 
-
         echo "<script>
-                alert('Despesa atualizada com sucesso.');
-                window.location.href = '../../usuario/despesas.php';
+                alert('Limite definido com sucesso.');
+                window.location.href = '../../usuario/dashboard.php';
               </script>";
         exit;
     } else {
-        $erro = "Erro ao atualizar despesa. Por favor, tente novamente mais tarde.";
+        $erro = "Erro ao registrar Limite. Por favor, tente novamente mais tarde.";
         echo "<script>alert('$erro');
-            window.location.href = '../../usuario/despesas.php';
+            window.location.href = '../../usuario/pagamentos.php';
               </script>";
         exit;
     }
 }
-?>

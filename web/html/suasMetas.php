@@ -22,7 +22,7 @@
                     <ul class="navbar-nav">
                         <li class="navbar-item"><a href="#"><img src="assets/logoWhite.svg" alt="" height="100%"></a>
                         </li>
-                        <li class="navbar-item"><a href="../index.php" class="nav-link text-white">Home</a></li>
+                        <li class="navbar-item"><a href="../../index.php" class="nav-link text-white">Home</a></li>
                         <li class="navbar-item"><a href="ajuda.php" class="nav-link text-white">Ajuda</a></li>
                         <li class="navbar-item"><a href="suasMetas.php" class="nav-link text-warning">Suas Metas</a>
                         </li>
@@ -67,7 +67,7 @@
                             <li>Ajustar suas metas conforme suas necessidades financeiras mudam.</li>
                         </ul>
                         <div class="text-center">
-                            <a href="#" class="btn btn-warning">Comece Agora</a>
+                            <a href="#" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#popUpSignIn">Comece Agora</a>
                         </div>
                     </div>
                     <div class="col-md-6">

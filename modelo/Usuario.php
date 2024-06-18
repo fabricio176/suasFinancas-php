@@ -107,4 +107,5 @@ class Usuario
         return $result->fetch_all(MYSQLI_ASSOC);
 
     }
+
 }
