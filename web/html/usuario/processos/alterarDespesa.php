@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Inclui o arquivo de conexão
     require_once '../../../../modelo/conexao.php';
     require_once '../../../../modelo/Despesas.php';
-
+    require_once '../../../../modelo/Usuario.php';
 
     // Captura os dados do formulário
     $descricao = $_POST['descricao'];
@@ -24,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Instancia a classe Despesa com a conexão
     $despesaModel = new Despesas($conn);
+    $usuarioModel = new Usuario($conn);
 
 
 

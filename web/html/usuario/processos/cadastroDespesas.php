@@ -31,6 +31,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $despesaModel = new Despesas($conn);
   $usuarioModel = new Usuario($conn);
 
+
+
   // Verifica o valor mínimo
   $valorMinimo = $despesaModel->obterValorMinimo($userID);
   if ($valorMinimo !== null && ($valor < $valorMinimo && !$recorrente)) {
@@ -73,12 +75,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $despesasDashboard = $usuarioModel->buscarDados($_SESSION['UserID'], 'Despesas');
     $metasDashboard = $usuarioModel->buscarDados($_SESSION['UserID'], 'Metas');
     $pagamentosDashboard = $usuarioModel->buscarDados($_SESSION['UserID'], 'Pagamentos');
+    $despesasPrestesAVencer = $despesaModel->verificarDespesasPrestesAVencer($_SESSION['UserID']);
 
     // Armazena as variáveis na sessão
     $_SESSION['despesas'] = $despesas;
     $_SESSION['despesasDashboard'] = $despesasDashboard;
     $_SESSION['metasDashboard'] = $metasDashboard;
     $_SESSION['pagamentosDashboard'] = $pagamentosDashboard;
+    $_SESSION['despesasPrestesAVencer'] = $despesasPrestesAVencer;
 
     echo "<script>
                 alert('Despesa inserida com sucesso.');

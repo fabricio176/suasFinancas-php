@@ -45,6 +45,9 @@ class DespesasController
         return $this->obterValorMinimo($userID);
     }
 
+    public function verificarDespesasPrestesAVencer($userID){
+        return $this->verificarDespesasPrestesAVencer($userID);
+    }
 }
 
 // Fechar a conexão após todas as operações

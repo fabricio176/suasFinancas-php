@@ -6,6 +6,9 @@ if (!isset($_SESSION['Nome'])) {
     exit();
 }
 
+
+// Atribui $_SESSION['despesas'] a $despesas
+$despesas = isset($_SESSION['despesas']) ? $_SESSION['despesas'] : [];
 ?>
 
 <!DOCTYPE html>
@@ -56,6 +59,10 @@ if (!isset($_SESSION['Nome'])) {
             </nav>
         </header>
         <!-- ---------- HEADER -------- -->
+
+        <!-- MODAL MEU PERFIL -->
+        <?php include '../components/alertaDespesas.php'; ?>
+        <!-- MODAL MEU PERFIL -->
 
         <!-- MODAL MEU PERFIL -->
         <?php include '../components/modalMeuPerfil.php'; ?>

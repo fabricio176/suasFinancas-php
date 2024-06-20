@@ -285,4 +285,56 @@ class Despesas
 
         return $row ? $row['ValorMinimo'] : null;
     }
+
+    public function verificarDespesasPrestesAVencer($userID)
+    {
+        // Definir o número de dias de tolerância para o vencimento
+        $diasTolerancia = 3; // Exemplo: 3 dias de tolerância
+
+        // Preparar a declaração SQL para buscar despesas próximas ao vencimento e vencidas
+        $sql = "SELECT DespesaID, Descricao, DataDespesa, DATEDIFF(DataDespesa, CURDATE()) AS DiasRestantes 
+            FROM Despesas 
+            WHERE UserID = ? 
+                AND StatusDespesa = 'Não Paga' 
+                AND (DataDespesa >= CURDATE() AND DataDespesa <= DATE_ADD(CURDATE(), INTERVAL ? DAY))";
+
+        $stmt = $this->conn->prepare($sql); // Prepare a consulta SQL
+
+        if ($stmt === false) {
+            die('Erro na preparação da declaração SQL: ' . $this->conn->error);
+        }
+
+        $stmt->bind_param("ii", $userID, $diasTolerancia); // Vincular parâmetros
+
+        $stmt->execute(); // Executar a consulta
+
+        $result = $stmt->get_result(); // Obter o resultado da consulta
+
+        $despesasPrestesAVencer = array();
+        $despesasVencidas = array();
+
+        // Verificar se houve resultados
+        if ($result->num_rows > 0) {
+            // Iterar sobre os resultados
+            while ($row = $result->fetch_assoc()) {
+                $row['DataDespesa'] = date('Y-m-d', strtotime($row['DataDespesa'])); // Formata a data para garantir consistência
+
+                if ($row['DiasRestantes'] < 0) {
+                    // Despesa vencida
+                    $despesasVencidas[] = $row;
+                } else {
+                    // Despesa prestes a vencer
+                    $despesasPrestesAVencer[] = $row;
+                }
+            }
+        }
+
+        $stmt->close(); // Fechar a declaração
+
+        // Retornar um array associativo com as despesas prestes a vencer e vencidas
+        return array(
+            'prestesAVencer' => $despesasPrestesAVencer,
+            'vencidas' => $despesasVencidas
+        );
+    }
 }

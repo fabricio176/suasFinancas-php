@@ -35,6 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // despesas
         $despesas = $despesaModel->verDespesas($_SESSION['UserID']);
+        $despesasPrestesAVencer = $despesaModel->verificarDespesasPrestesAVencer($_SESSION['UserID']);
 
         //busca os dados das tabelas para o dashboard
         $despesasDashboard = $usuarioModel->buscarDados($_SESSION['UserID'], 'Despesas');
@@ -46,6 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['despesasDashboard'] = $despesasDashboard;
         $_SESSION['metasDashboard'] = $metasDashboard;
         $_SESSION['pagamentosDashboard'] = $pagamentosDashboard;
+        $_SESSION['despesasPrestesAVencer'] = $despesasPrestesAVencer;
 
 
 

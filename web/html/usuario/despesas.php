@@ -8,7 +8,27 @@ if (!isset($_SESSION['Nome'])) {
 
 // Atribui $_SESSION['despesas'] a $despesas
 $despesas = isset($_SESSION['despesas']) ? $_SESSION['despesas'] : [];
+
+require_once '../../../modelo/Despesas.php';
+
+$despesaModel = new Despesas($conn);
+
+$despesasPrestesAVencer = $despesaModel->verificarDespesasPrestesAVencer($_SESSION['UserID']);
+// Armazena o resultado na sessão
+$_SESSION['despesasPrestesAVencer'] = $despesasPrestesAVencer;
+
+// Filtrar despesas vencidas (data de despesa anterior a hoje e não pagas)
+$despesasVencidas = array_filter($despesasPrestesAVencer, function ($despesa) {
+    return isset($despesa['DataDespesa']) && isset($despesa['StatusDespesa']) &&
+        strtotime($despesa['DataDespesa']) < strtotime('today') &&
+        $despesa['StatusDespesa'] === 'Não Paga';
+});
+
+$_SESSION['despesasVencidas'] = $despesasVencidas;
+
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -18,8 +38,7 @@ $despesas = isset($_SESSION['despesas']) ? $_SESSION['despesas'] : [];
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Despesas - SuasFinanças</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="../../../css/index.css">
 </head>
 
@@ -33,8 +52,7 @@ $despesas = isset($_SESSION['despesas']) ? $_SESSION['despesas'] : [];
             <nav class="navbar navbar-expand-sm bg-dark py-4">
                 <div class="container">
                     <ul class="navbar-nav">
-                        <li class="navbar-item"><a href="index.php"><img src="assets/logoWhite.svg" alt=""
-                                    height="100%"></a>
+                        <li class="navbar-item"><a href="index.php"><img src="assets/logoWhite.svg" alt="" height="100%"></a>
                         </li>
                         <li class="navbar-item"><a href="dashboard.php" class="nav-link text-white">Dashboard</a>
                         </li>
@@ -48,8 +66,7 @@ $despesas = isset($_SESSION['despesas']) ? $_SESSION['despesas'] : [];
                         </li>
                     </ul>
                     <ul class="navbar-nav">
-                        <li class="navbar-item"><button class="btn btn-outline text-white border-white"
-                                data-bs-toggle="modal" data-bs-target="#popUpLogin"> MEU PERFIL
+                        <li class="navbar-item"><button class="btn btn-outline text-white border-white" data-bs-toggle="modal" data-bs-target="#popUpLogin"> MEU PERFIL
                             </button></li>
                         <li class="nav-item">
                             <a class="btn btn-danger" href="../../../index.php">SAIR</a>
@@ -59,6 +76,10 @@ $despesas = isset($_SESSION['despesas']) ? $_SESSION['despesas'] : [];
             </nav>
         </header>
         <!-- ---------- HEADER -------- -->
+
+        <!-- MODAL MEU PERFIL -->
+        <?php include '../components/alertaDespesas.php'; ?>
+        <!-- MODAL MEU PERFIL -->
 
         <!-- MODAL MEU PERFIL -->
         <?php include '../components/modalMeuPerfil.php'; ?>
@@ -109,15 +130,13 @@ $despesas = isset($_SESSION['despesas']) ? $_SESSION['despesas'] : [];
                             <div class="mb-3">
                                 <label class="form-check-label">Recorrente:</label>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="recorrente" id="recorrente_sim"
-                                        value="1">
+                                    <input class="form-check-input" type="radio" name="recorrente" id="recorrente_sim" value="1">
                                     <label class="form-check-label" for="recorrente_sim">
                                         Sim
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="recorrente" id="recorrente_nao"
-                                        value="0" checked>
+                                    <input class="form-check-input" type="radio" name="recorrente" id="recorrente_nao" value="0" checked>
                                     <label class="form-check-label" for="recorrente_nao">
                                         Não
                                     </label>
@@ -125,8 +144,7 @@ $despesas = isset($_SESSION['despesas']) ? $_SESSION['despesas'] : [];
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary">Registrar Despesa</button>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#modalDespesa">Ver Despesas</button>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDespesa">Ver Despesas</button>
                             </div>
                         </form>
                     </div>
@@ -150,15 +168,9 @@ $despesas = isset($_SESSION['despesas']) ? $_SESSION['despesas'] : [];
     <!-- ----------------------- MAIN PAGE ------------------- -->
 
     <!-- ----------------------- SCRIPT ------------------- -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
-        integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
     <!-- ----------------------- SCRIPT ------------------- -->
 </body>
 
