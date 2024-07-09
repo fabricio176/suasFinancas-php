@@ -20,5 +20,5 @@
 
 2 - Rode o script sql no banco de dados de sua preferência/ Run the script sql in your database preference<br>
 
-3 - Inicie o Servidor/Starts the Server
+3 - Inicie o Servidor/Starts the Server<br>
 4 - Rode o projeto/ Run the project
